@@ -15,7 +15,7 @@ const Footer = () => {
                       DocAppoint
                     </p>
                   </div>
-           <p>&copy;2025. All rights reserved</p>
+           <p>&copy;2026. All rights reserved</p>
            </div>
 
            <div className='space-y-2'>
