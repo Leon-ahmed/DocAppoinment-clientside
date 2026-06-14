@@ -1,21 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { FaHospital, FaStar, FaCalendarCheck } from "react-icons/fa";
 import { FiMapPin } from "react-icons/fi";
 import { IoBagAddSharp } from "react-icons/io5";
 import { BsMortarboardFill } from "react-icons/bs";
 import { Button } from "@heroui/react";
+import Bookingmodal from "../components/Bookingmodal";
 
 export default function DoctorClient({ data }) {
-
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="bg-linear-to-r from-emerald-100/80 via-gray-100 to-sky-200 p-4 sm:p-6 lg:p-10">
-
-     
       <div className="flex flex-col md:flex-row gap-5 bg-white p-5 sm:p-8 lg:p-10 shadow rounded-xl items-center md:items-start">
-
         <div className="w-full md:w-auto flex justify-center md:justify-start">
           <Image
             src={data.image}
@@ -27,7 +26,6 @@ export default function DoctorClient({ data }) {
         </div>
 
         <div className="font-medium space-y-2 text-center md:text-left">
-
           <p className="bg-[#0059BB] text-white px-2 py-1 text-xs sm:text-sm inline rounded-2xl">
             {data.specialty}
           </p>
@@ -50,17 +48,11 @@ export default function DoctorClient({ data }) {
             <FiMapPin />
             {data.location}
           </p>
-
         </div>
       </div>
 
-     
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-10 gap-5">
-
-       
         <div className="col-span-2 space-y-4">
-
-       
           <div className="bg-white p-5 rounded-xl">
             <p className="text-[#0059BB] font-medium mb-2">
               About {data.name}
@@ -69,53 +61,59 @@ export default function DoctorClient({ data }) {
               {data.description}
             </p>
           </div>
- 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white p-5 rounded-xl">
               <div className="flex gap-3 items-center">
-
                 <div className="bg-[#E6EEFF] rounded-full flex justify-center items-center h-10 w-10">
                   <IoBagAddSharp />
                 </div>
 
                 <div>
-                  <p className="text-[#414754] text-sm">EXPERIENCE</p>
-                  <p className="font-bold text-lg">{data.experience}</p>
+                  <p className="text-[#414754] text-sm">
+                    EXPERIENCE
+                  </p>
+                  <p className="font-bold text-lg">
+                    {data.experience}
+                  </p>
                 </div>
-
               </div>
             </div>
 
             <div className="bg-white p-5 rounded-xl">
               <div className="flex gap-3 items-center">
-
                 <div className="bg-[#E6EEFF] rounded-full flex justify-center items-center h-10 w-10">
-                 <BsMortarboardFill />
+                  <BsMortarboardFill />
                 </div>
 
                 <div>
-                  <p className="text-[#414754] text-sm">EDUCATION</p>
-                  <p className="font-bold text-lg">{data.education}</p>
+                  <p className="text-[#414754] text-sm">
+                    EDUCATION
+                  </p>
+                  <p className="font-bold text-lg">
+                    {data.education}
+                  </p>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
 
-     
         <div className="col-span-1 bg-white border border-gray-100 p-5 rounded-xl space-y-5">
-
-     
           <div>
-            <p className="text-sm text-gray-500">Consultation Fee</p>
-            <p className="text-xl font-bold">{data.fee}$/session</p>
+            <p className="text-sm text-gray-500">
+              Consultation Fee
+            </p>
+            <p className="text-xl font-bold">
+              {data.fee}$/session
+            </p>
           </div>
- 
+
           <div className="bg-[#EFF4FF] p-3 rounded-xl">
-            <p className="font-medium mb-2">Availability Days</p>
+            <p className="font-medium mb-2">
+              Availability Days
+            </p>
+
             <div className="flex flex-wrap gap-2">
               {data.days.map((day) => (
                 <span
@@ -128,9 +126,11 @@ export default function DoctorClient({ data }) {
             </div>
           </div>
 
-        
           <div className="bg-[#EFF4FF] p-3 rounded-xl">
-            <p className="font-medium mb-2">Available Time</p>
+            <p className="font-medium mb-2">
+              Available Time
+            </p>
+
             <div className="flex flex-wrap gap-2">
               {data.availability.map((time) => (
                 <span
@@ -143,25 +143,25 @@ export default function DoctorClient({ data }) {
             </div>
           </div>
 
-
-
-
-
-
-
-
-          {/* BUTTON */}
-          <Button onPress={() => alert("Booked!")}>
-            <FaCalendarCheck /> Book Appointment
+          <Button
+            color="primary"
+            onPress={() => setIsOpen(true)}
+          >
+            <FaCalendarCheck />
+            Book Appointment
           </Button>
 
           <p className="text-center text-sm text-gray-500">
             Instant confirmation after payment
           </p>
-
         </div>
-
       </div>
+
+      <Bookingmodal
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+        doctor={data}
+      />
     </div>
   );
 }
