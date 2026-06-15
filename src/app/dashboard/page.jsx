@@ -1,6 +1,7 @@
  import { IoPersonSharp } from "react-icons/io5";
  import { BsFillClockFill } from "react-icons/bs";
  import { MdCalendarMonth } from "react-icons/md";
+ import { MdEmail } from "react-icons/md";
  export const metadata = {
   title: "Docappoint-Dashboard",
   description: "A doctor appointment website",
@@ -31,8 +32,15 @@ const Dashboard = async() => {
                              
                              <div className=" space-y-2">
                              <p className="flex items-center text-xl font-medium gap-1"><IoPersonSharp />Patient: {booking.patientName}</p>
+                             <p className="flex items-center gap-1"><MdEmail />Email: {booking.userEmail}</p>
                              <p className="flex items-center gap-1"><MdCalendarMonth />Date: {booking.appointmentDate}</p>
                              <p className="flex items-center gap-1"><BsFillClockFill />Time: {booking.appointmentTime}</p>
+                             </div>
+
+
+                             <div className=" flex gap-2">
+                                <button className="p-2 bg-[#0059BB]   transition-all duration-300 ease-in-out hover:scale-105   font-medium rounded-md text-white">Update</button>
+                                <button className="p-2 bg-red-500/90  transition-all duration-300 ease-in-out hover:scale-105    hover:shadow-lg hover:bg-red-600            font-medium rounded-md text-white">Delete</button>
                              </div>
                             
                          
@@ -61,31 +69,3 @@ export default Dashboard;
 
 
 
-
-// appointmentDate
-// : 
-// "2026-06-19"
-// appointmentTime
-// : 
-// "10:00 AM - 01:00 PM"
-// doctorName
-// : 
-// "Dr. Mahmud Hasan"
-// doctorSpeciality
-// : 
-// "Neurologist"
-// gender
-// : 
-// "Female"
-// patientName
-// : 
-// "Semo"
-// phone
-// : 
-// "018787634"
-// userEmail
-// : 
-// "semo@gmail.com"
-// _id
-// : 
-// "6a2ec021c5042c24832859e8"
