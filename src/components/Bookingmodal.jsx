@@ -28,6 +28,7 @@ export default function BookingModal({
   const appointmentData = {
     userEmail: formData.userEmail,
     doctorName: doctor?.name,
+    doctorSpeciality:doctor?.specialty,
     patientName: formData.patientName,
     gender: formData.gender,
     phone: formData.phone,
@@ -81,6 +82,12 @@ export default function BookingModal({
                       Doctor Name
                     </p>
                     <Input value={doctor?.name} readOnly />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium mb-1">
+                      Speciality
+                    </p>
+                    <Input value={doctor?.specialty} readOnly />
                   </div>
 
                
