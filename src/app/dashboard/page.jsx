@@ -6,8 +6,10 @@ export const metadata = {
 };
 
 const Dashboard = async () => {
-  const res = await fetch("http://localhost:5000/bookings");
-  const data = await res.json();
+ const res = await fetch("http://localhost:5000/bookings", {
+  cache: "no-store",
+});
+const data = await res.json();
 
   return <DashboardClient bookings={data} />;
 };

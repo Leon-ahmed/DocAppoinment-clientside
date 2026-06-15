@@ -25,10 +25,22 @@ export default function BookingModal({
   };
 
  const handleSubmit = async (close) => {
+  if (
+    !formData.userEmail ||
+    !formData.patientName ||
+    !formData.gender ||
+    !formData.phone ||
+    !formData.appointmentDate ||
+    !formData.appointmentTime
+  ) {
+    toast.error("Please fill all required fields");
+    return;
+  }
+
   const appointmentData = {
     userEmail: formData.userEmail,
     doctorName: doctor?.name,
-    doctorSpeciality:doctor?.specialty,
+    doctorSpeciality: doctor?.specialty,
     patientName: formData.patientName,
     gender: formData.gender,
     phone: formData.phone,
@@ -46,14 +58,13 @@ export default function BookingModal({
     });
 
     const data = await res.json();
-    console.log("Saved:", data);
 
     if (data.acknowledged) {
-  toast.success("Appointment booked successfully!");
-  close();
-} else {
-  toast.error("Booking failed!");
-}
+      toast.success("Appointment booked successfully!");
+      close();
+    } else {
+      toast.error("Booking failed!");
+    }
   } catch (error) {
     console.error("Error saving appointment:", error);
   }
@@ -96,6 +107,7 @@ export default function BookingModal({
                       User Email
                     </p>
                    <Input
+                       required
                       value={formData.userEmail}
                       onChange={(e) =>
                         handleChange(
