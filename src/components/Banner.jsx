@@ -31,10 +31,11 @@ export default function Banner() {
              
           </div>
              <div>
-            <Image src={b1} alt="image"
-              className="rounded-2xl"
+            <Image src={b1} alt="image" loading="eager"
+              className="rounded-2xl h-auto w-auto"
               height={1150}
               width={950}
+
             ></Image>
           </div>
         </div>
@@ -54,7 +55,7 @@ export default function Banner() {
           </div>
           <div>
             <Image src={b2} alt="image"
-              className="rounded-2xl"
+              className="rounded-2xl h-auto w-auto"
               height={1150}
               width={950}
             ></Image>
@@ -77,7 +78,7 @@ export default function Banner() {
 
              <div>
             <Image src={b3} alt="image"
-              className="rounded-2xl"
+              className="rounded-2xl h-auto w-auto"
               height={1150}
               width={950}
             ></Image>

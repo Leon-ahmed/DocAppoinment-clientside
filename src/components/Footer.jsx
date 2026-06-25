@@ -10,7 +10,7 @@ const Footer = () => {
            
            <div className='space-y-2'>
             <div className="flex items-center gap-2">
-                    <Image src={logo} width={25} height={15} alt="Logo" />
+                    <Image src={logo} width={25} height={15} className='h-auto w-auto' alt="Logo" />
                     <p className="text-2xl font-bold text-[#0059BB]">
                       DocAppoint
                     </p>

@@ -26,10 +26,10 @@ const TopRatedDoctor = () => {
               <Image
                 src={doctor.image}
                 alt={doctor.name}
-                width={300}
+                width={250}
             
                 height={200}
-                className="rounded-xl object-cover"
+                className="rounded-xl object-cover h-auto w-auto"
               />
             </div>
 
