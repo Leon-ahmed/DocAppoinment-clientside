@@ -6,9 +6,11 @@ import Navlink from "../components/Navlink";
 import Link from 'next/link';
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useSession } from "@/lib/auth-client";
 const Navbar = () => {
       const [open, setOpen] = useState(false);
-      const user=null;
+     const {data:session,isPending}=useSession();
+     const user=session?.user;
 
 
 
@@ -31,7 +33,7 @@ const Navbar = () => {
         </button>
 
         <div className="flex items-center gap-2">
-          <Image src={logo} width={25} height={15} className='h-auto w-auto' alt="Logo" />
+          <Image src={logo} width={25} height={15} className='h-auto  ' alt="Logo" />
           <p className="text-2xl font-bold text-[#0059BB]">
             DocAppoint
           </p>
@@ -46,7 +48,12 @@ const Navbar = () => {
       </div>
 
      
-      <div className="hidden md:flex gap-2">
+    <div>
+      {
+        user?(<>
+            
+        
+        </>):(  <div className="hidden md:flex gap-2">
         <Link
           href="/login"
           className="px-4 py-2 border-2 border-[#0059BB] rounded-md text-[#0059BB]"
@@ -60,7 +67,9 @@ const Navbar = () => {
         >
           Register
         </Link>
-      </div>
+      </div>)
+      }
+    </div>
     </div>
 
    
