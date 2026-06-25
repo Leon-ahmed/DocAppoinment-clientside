@@ -112,6 +112,7 @@ export default function Editmodal({
                       User Email
                     </p>
                     <Input
+                     readOnly
                       value={formData.userEmail}
                       onChange={(e) =>
                         handleChange(

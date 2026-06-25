@@ -37,6 +37,7 @@ console.log({data,error});
     } else {
       toast.success("Sign In successful! Welcome.");
       router.push("/");
+      router.refresh();
     }
   };
 

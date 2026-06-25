@@ -3,13 +3,19 @@
 import { useState } from "react";
 import { Modal, Button, Input } from "@heroui/react";
  import { toast } from "react-toastify";
+ import { useSession } from "@/lib/auth-client";
 export default function BookingModal({
   isOpen,
   onOpenChange,
   doctor,
-}) {
+})
+
+
+{
+
+  const { data: session } = useSession();
   const [formData, setFormData] = useState({
-    userEmail: "user@gmail.com",
+    userEmail: session?.user?.email || "",
     patientName: "",
     gender: "",
     phone: "",
@@ -107,7 +113,7 @@ export default function BookingModal({
                       User Email
                     </p>
                    <Input
-                       required
+                       readOnly
                       value={formData.userEmail}
                       onChange={(e) =>
                         handleChange(

@@ -6,13 +6,29 @@ import Navlink from "../components/Navlink";
 import Link from 'next/link';
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useSession } from "@/lib/auth-client";
+import { useSession, signOut } from "@/lib/auth-client";
+import { Avatar } from '@heroui/react';
+import { useRouter } from 'next/navigation';
+
+
+
+
 const Navbar = () => {
       const [open, setOpen] = useState(false);
      const {data:session,isPending}=useSession();
      const user=session?.user;
 
+     const router=useRouter();
 
+const handleLogout = async () => {
+  await signOut({
+    fetchOptions: {
+      onSuccess: () => {
+        router.push("/");
+      },
+    },
+  });
+};
 
 
 
@@ -48,12 +64,33 @@ const Navbar = () => {
       </div>
 
      
-    <div>
+    <div className="hidden md:flex gap-6 font-medium">
       {
-        user?(<>
+        user?( 
+         <div className='flex gap-1'>
+           <Avatar className="cursor-pointer">
+                                        <Avatar.Image
+                                            alt="User Image"
+                                            src={user?.image}
+                                            referrerPolicy="no-referrer"
+                                        />
+                                        <Avatar.Fallback>
+                                            {user?.name?.[0] ?? "U"}
+                                        </Avatar.Fallback>
+                                    </Avatar>
+
+
+             <button
+                                    type="button"  onClick={handleLogout}
+                                    className="p-2 bg-[#003D9B] text-white rounded-md mb-4 transition-all active:scale-95"
+                                >
+                                    Logout
+                                </button>                         
+         </div>
+         
             
         
-        </>):(  <div className="hidden md:flex gap-2">
+        ):(  <div className="hidden md:flex gap-2">
         <Link
           href="/login"
           className="px-4 py-2 border-2 border-[#0059BB] rounded-md text-[#0059BB]"
@@ -86,19 +123,51 @@ const Navbar = () => {
 
         <hr />
 
+        <div>
+             {
+        user?( 
+         <div className='flex   justify-center  gap-4'>
+           <Avatar className="cursor-pointer ">
+                                        <Avatar.Image
+                                            alt="User Image"
+                                            src={user?.image}
+                                            referrerPolicy="no-referrer"
+                                        />
+                                        <Avatar.Fallback>
+                                            {user?.name?.[0] ?? "U"}
+                                        </Avatar.Fallback>
+                                    </Avatar>
+
+
+            <div  >
+               <button
+                                    type="button" onClick={handleLogout}
+                                    className="p-2 bg-[#003D9B]    text-white rounded-md mb-4 transition-all active:scale-95"
+                                >
+                                    Logout
+                                </button>  
+              </div>                       
+         </div>
+         
+            
+        
+        ):(  <div className=" flex gap-2">
         <Link
           href="/login"
-          className="px-4 py-2 border-2 border-[#0059BB] rounded-md text-center text-[#0059BB]"
+          className="px-4 py-2 border-2 border-[#0059BB] rounded-md text-[#0059BB]"
         >
           Log in
         </Link>
 
         <Link
           href="/register"
-          className="px-4 py-2 bg-[#0059BB] rounded-md text-center text-white"
+          className="px-4 py-2 bg-[#0059BB] rounded-md text-white"
         >
           Register
         </Link>
+      </div>)
+      }
+        </div>
       </div>
     </div>
   </nav>
