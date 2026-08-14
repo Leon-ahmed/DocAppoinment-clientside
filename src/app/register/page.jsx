@@ -37,7 +37,7 @@ console.log({data,error});
       toast.error(error.message || "Registration failed. Please try again.");
     } else {
       toast.success("Registration successful! Welcome.");
-      router.push("/");
+      router.push("/login");
     }
   };
 
