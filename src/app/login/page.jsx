@@ -13,6 +13,9 @@ import {
 import { Check } from "lucide-react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { GoGoal } from "react-icons/go";
+import { GrGooglePay } from "react-icons/gr";
+import { BsGoogle } from "react-icons/bs";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -40,6 +43,12 @@ console.log({data,error});
       router.refresh();
     }
   };
+
+ const handleGoogleSignIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+}
 
   return (
     <div className="p-10 bg-amber-50">
@@ -97,7 +106,7 @@ console.log({data,error});
           <FieldError />
         </TextField>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <Button type="submit">
             <Check />
             Submit
@@ -105,7 +114,19 @@ console.log({data,error});
           <Button type="reset" variant="secondary">
             Reset
           </Button>
+         
         </div>
+         <div  className="flex items-center gap-3" >
+          <hr  className="flex-1" />
+          <span className="text-gray-400">Or</span>
+          <hr  className="flex-1"  />
+         </div>
+
+     
+          <Button type="button" onClick={handleGoogleSignIn}  className="w-full"  variant="primary">
+           <BsGoogle></BsGoogle> google
+          </Button>
+     
       </Form>
     </div>
   );
