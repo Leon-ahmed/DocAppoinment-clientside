@@ -48,10 +48,12 @@ const Profile = () => {
 
 const updateProfile = async () => {
   try {
+    const { data: tokenData } = await authClient.token();
     const response = await fetch("http://localhost:5000/user/profile", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${tokenData?.token || ""}`
       },
       body: JSON.stringify({
         currentEmail: user.email,

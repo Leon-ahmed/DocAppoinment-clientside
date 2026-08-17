@@ -7,6 +7,7 @@ import { MdCalendarMonth, MdEmail } from "react-icons/md";
 import Editmodal from "@/components/Editmodal";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function DashboardClient({ bookings }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +17,12 @@ export default function DashboardClient({ bookings }) {
 
   const handleDelete = async (id) => {
     try {
+      const { data: tokenData } = await authClient.token();
       const res = await fetch(`http://localhost:5000/bookings/${id}`, {
         method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${tokenData?.token || ""}`
+        }
       });
 
       const data = await res.json();

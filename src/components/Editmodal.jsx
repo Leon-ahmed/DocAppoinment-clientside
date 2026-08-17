@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Modal, Button, Input } from "@heroui/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function Editmodal({
   isOpen,
@@ -43,12 +44,14 @@ export default function Editmodal({
 
   const handleSubmit = async (close) => {
     try {
+      const { data: tokenData } = await authClient.token();
       const res = await fetch(
         `http://localhost:5000/bookings/${booking._id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${tokenData?.token || ""}`
           },
           body: JSON.stringify(formData),
         }

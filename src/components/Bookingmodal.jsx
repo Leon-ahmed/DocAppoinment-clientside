@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Modal, Button, Input } from "@heroui/react";
  import { toast } from "react-toastify";
- import { useSession } from "@/lib/auth-client";
+ import { authClient, useSession } from "@/lib/auth-client";
 export default function BookingModal({
   isOpen,
   onOpenChange,
@@ -55,10 +55,12 @@ export default function BookingModal({
   };
 
   try {
+    const { data: tokenData } = await authClient.token();
     const res = await fetch("http://localhost:5000/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${tokenData?.token || ""}`
       },
       body: JSON.stringify(appointmentData),
     });

@@ -18,12 +18,21 @@ const Dashboard = async () => {
     redirect("/login");
   }
 
+  // Retrieve JWT token server-side via Better-Auth
+  const tokenData = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const token = tokenData?.token;
+
   const res = await fetch(
     `http://localhost:5000/bookings?email=${encodeURIComponent(
       session.user.email
     )}`,
     {
       cache: "no-store",
+      headers: {
+        "Authorization": `Bearer ${token || ""}`
+      }
     }
   );
 
