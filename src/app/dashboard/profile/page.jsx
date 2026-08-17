@@ -79,13 +79,13 @@ const updateProfile = async () => {
   return (
     <div className="flex flex-col justify-center items-center border p-20 rounded-2xl bg-linear-to-br from-cyan-50 via-white to-blue-100 space-y-5">
 
-      <Image
-        width={100}
-        height={100}
-        alt="User Image"
-        src={user.image || deuser}
-        className="rounded-xl"
-      />
+<Image
+  width={100}
+  height={100}
+  alt="User Image"
+  src={user.image?.trim() || deuser}
+  className="rounded-xl"
+/>
 
       <p>
         <span className="font-medium">Name: </span>
